@@ -46,9 +46,19 @@ O próximo passo é usarmos um template de projeto que utiliza Django e Python, 
 Observe que agora temos uma aplicação configurada para funcionar dentro do OpenShift. Para realizar o teste da nossa aplicação, basta executar o seguinte comando:
 
     git push
-Ao realizar o **push** no 
-É importante comentar que o OpenShift trabalha de duas formas para gerenciar as dependências de biblioteas do projeto: (i) utilizando o arquivo de **setup.py** ou requirimentes.txt.  
 
+Ao realizar o **push**, o código fonte é enviado para o servidor do OpenShift para o deploy. Em caso de sucesso, você consiguirá acessar a aplicação pela url ledszeppellin.<dominio>.rhc.com. 
+
+É importante comentar que o OpenShift trabalha de duas formas para gerenciar as dependências de biblioteas do projeto: (i) utilizando o arquivo de **setup.py** ou **requirements.txt**. Para seguir o padrão que é utilizado na comunidade, iremos apagar o setup.py com o seguinte comando: 
+
+    git rm -rf setup.py
+    git commit -am "Apagando o arquivo setup.py"
+
+O arquivo **requirements.txt** deve ter o seguinte conteúdo:
+    
+    Django==1.8.5
+    
+jhfhkjshkfhskhfk    
     git remote rename origin openshift
 
 ## Aumatizando a Integração Contínua com o Travis e Github
