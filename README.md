@@ -82,8 +82,20 @@ script:
   - python manage.py behave  
 ```
 A tag **language** e **python** descrevem, respectivamente, qual é a linguagem que o projeto foi construido e qual versão do python foi utilizado. Essa informações são importantes, pois o Travis irá construir uma máquina virtual especifica para essa configuração. No caso do nosso projeto, será criada uma máquina linux com o python 3.3 instalada.
+```
+language: python
+python:
+  - '3.3'
+```
 
 As tags **branches** e **only** definem quais braches do GitHub que o Travis deve "vigiar". Em outras palavras, o travis será ativiado somente quando as branches desenvolvimento e master foram atualizadas.
+
+```
+branches:
+  only:
+  - master
+  - desenvolvimento
+```
 
 A tag **install** é utilizado para instalar dependências necessárias para a compilação e testes do software em desenvolvimento. No nosso caso, utilizamos essa tag para instalar o Django e outras biblioteca. 
 
@@ -93,6 +105,12 @@ install:
 ```
 
 Por fim, a tag **script** é utilizada para executar comandos após a instalação das dependências. No nosso caso, usamos essa tag para definir a etapa de execução dos testes, ou seja, utiilzamos a tag script para automatizar a execução dos nossos testes.
+
+```
+script:
+  - cd wsgi/myproject
+  - python manage.py behave  
+```
 
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
