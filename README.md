@@ -20,7 +20,7 @@ O **LedsZeppellin** é o nome dado ao conjunto de ferramentas, ou solução caso
 
 1. [Instalar e configurar o OpenShift e o Travis localmente](https://blog.openshift.com/how-to-build-and-deploy-openshift-java-projects-using-travis-ci/).
 2. Instalar o Python 3.3.
-3. Instalar o Virtualenv
+3. [Instalar o Virtualenv](https://pythonhelp.wordpress.com/2012/10/17/virtualenv-ambientes-virtuais-para-desenvolvimento/).
 
 ## Etapa Zero: Um pouco de conceitos
 
@@ -57,6 +57,17 @@ Ao realizar o **push** no
 
 ### Integrando o Travis e Github
 
+O Travis é um serviço de integração contínua que permite realizar diversos procedimentos toda vez que um determinado repositório, presente no Github, sofre alteração. Para realizar a integração entre o Github e o Travis basta seguir os passsos presentes nesse [link](https://docs.travis-ci.com/user/getting-started/). De forma sucinta, é necessário executar os seguintes passos:
+
+* Crie uma conta no Travis e no Github
+* No Travis, solicite ao Github que o Travis tenha acesso aos repositórios do Github 
+* No Travis, selecione o repositório do Github que seja ser "Vigiado" pelo Travis
+* No Git, crie um arquivo .travis.yml
+
+
+
+
+
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
 ### Automatizando a Comunicação da equipe com o Travis e Slack
@@ -72,3 +83,5 @@ Ao realizar o **push** no
 **[How to Build and Deploy OpenShift Java Projects using Travis CI](https://blog.openshift.com/how-to-build-and-deploy-openshift-java-projects-using-travis-ci/)**
 
 **[Integração Contínua e o processo Agile](http://blog.caelum.com.br/integracao-continua/)**
+
+**[Integrando Github com Travis](https://docs.travis-ci.com/user/getting-started/)**
