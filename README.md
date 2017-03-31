@@ -62,9 +62,25 @@ O Travis é um serviço de integração contínua que permite realizar diversos 
 * Crie uma conta no Travis e no Github
 * No Travis, solicite ao Github que o Travis tenha acesso aos repositórios do Github 
 * No Travis, selecione o repositório do Github que seja ser "Vigiado" pelo Travis
-* No Git, crie um arquivo .travis.yml
+* No Git, crie um arquivo .travis.yml, como segue
 
+```
+language: python
+python:
+  - '3.3'
 
+branches:
+  only:
+  - master
+  - desenvolvimento
+
+install:
+  - pip install -r requirements.txt  
+
+script:
+  - cd wsgi/myproject
+  - python manage.py behave  
+```
 
 
 
