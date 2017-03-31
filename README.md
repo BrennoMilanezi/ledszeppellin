@@ -81,8 +81,9 @@ script:
   - cd wsgi/myproject
   - python manage.py behave  
 ```
+A tag **language** e **python** descrevem, respectivamente, qual é a linguagem que o projeto foi construido e qual versão do python foi utilizado. Essa informações são importantes, pois o Travis irá construir uma máquina virtual especifica para essa configuração. No caso do nosso projeto, será criada uma máquina linux com o python 3.3 instalada.
 
-
+A tag **branches** e **only** definem quais braches do GitHub que o Travis deve "vigiar". Em outras palavras, o travis será ativiado somente quando as branches desenvolvimento e master foram atualizadas.
 
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
