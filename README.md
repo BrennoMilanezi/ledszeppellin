@@ -149,7 +149,13 @@ before_script:
 ### Automatizando a Comunicação da equipe com o Travis e Slack
 Como pode ser percebido, são diversos detalhes para que devemos estar atentos para o desenvolvimento de uma aplicação. Além disso, torna-se dificil acompanhar todos os acontecimentos de um projeto se não tivermos um canal único que centraliza a comunicação. Imagine trabalhar em um projeto com 10 programadores e tendo que acompanhar as novas versões dos código, as quebras de build, o controle de qualidade e outros fatores de um projeto de forma não automatizada. Um verdadeiro caos. Certo? 
 
-Para resolver o problema acima, o travis permite enviar mensagens para os membros do projeto. Essa mensagens podem ser feitas por email ou por um aplicativo de comunicação com o Slack. Em nossa arquitetura utilizamos o slack e seguimos os seguintes tutoriais para a configuração do ambiente: [tutorial 1](https://docs.travis-ci.com/user/notifications/) e [tutorial 2](https://blog.travis-ci.com/2014-03-13-slack-notifications/).
+Para resolver o problema acima, o travis permite enviar mensagens para os membros do projeto. Essa mensagens podem ser feitas por email ou por um aplicativo de comunicação com o Slack. Em nossa arquitetura utilizamos o slack e seguimos os seguintes tutoriais para a configuração do ambiente: [tutorial 1](https://docs.travis-ci.com/user/notifications/) e [tutorial 2](https://blog.travis-ci.com/2014-03-13-slack-notifications/). Veja um exemplo da nossa configuração:
+
+
+```
+notifications:
+    slack: xxxxx
+```
 
 ## Terceira Etapa: Delivery Contínuo - Entregando toda hora um software novo
 
