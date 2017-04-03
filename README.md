@@ -114,15 +114,35 @@ script:
 
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
-Todos estamos preocupados com a questão da Qualidade (e.g., processos, produtos, artefatos) dos projetos que estamos envolvidos. Aqui vamos explicar como podemos automatizar o controle da qualidade de código com o SonarQube e o Travis-CI:
+Todos estamos preocupados com a questão da Qualidade (e.g., processos, produtos, artefatos) dos projetos que estamos envolvidos. Nesses dois links ([link1](https://trajano.net/2016/11/integrating-travis-sonarqube/) e [link2](https://docs.travis-ci.com/user/sonarqube/)) são apresentados as etapas para automatizar o controle da qualidade de código com o SonarQube e o Travis-CI.
 
-* Crie uma conta no [SonarQube](https://sonarqube.com/)
-* Crie uma chave privada no SonarQube com o seguintes passos: 
+Observer como o nosso travis foi configurado
+```
+addons:
+    sonarqube:
+        organization: "LEDS"
+        token:
+            secure: xxxxx
 
-    * My Account
-    * Security
-    * crie o token e guarde em algum lugar.
-  
+script:
+  - cd wsgi/myproject
+  - python manage.py behave
+  - cd ..
+  - cd ..
+  - sonar-scanner
+       
+```
+Por se tratar de um projeto em Python, torna-se necessário adicionar algum comando a mais na configuração da máquina que será criada. Isso ocorre, pois o SonnaQube foi desenvolvido em Java e torna-se necessário configurar o ambiente java. Para isso foi adicionado as seguintes linhas no .travis.yml:
+```
+jdk:
+  - oraclejdk8
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer 
+before_script:
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle           
+```
 
 ### Automatizando a Comunicação da equipe com o Travis e Slack
 
