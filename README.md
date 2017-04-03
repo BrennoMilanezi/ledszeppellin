@@ -114,6 +114,15 @@ script:
 
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
+Todos estamos preocupados com a questão da Qualidade (e.g., processos, produtos, artefatos) dos projetos que estamos envolvidos. Aqui vamos explicar como podemos automatizar o controle da qualidade de código com o SonarQube e o Travis-CI:
+
+* Crie uma conta no [SonarQube](https://sonarqube.com/)
+* Crie uma chave privada no SonarQube com o seguintes passos: 
+  ** My Account
+  ** Security
+  ** crie o token e guarde em algum lugar.
+  
+
 ### Automatizando a Comunicação da equipe com o Travis e Slack
 
 ## Terceira Etapa: Delivery Contínuo - Entregando toda hora um software novo
