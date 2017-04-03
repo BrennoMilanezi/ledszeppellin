@@ -114,7 +114,7 @@ script:
 
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
-Todos estamos preocupados com a questão da Qualidade (e.g., processos, produtos, artefatos) dos projetos que estamos envolvidos. Nesses dois links ([link1](https://trajano.net/2016/11/integrating-travis-sonarqube/) e [link2](https://docs.travis-ci.com/user/sonarqube/)) são apresentados as etapas para automatizar o controle da qualidade de código com o SonarQube e o Travis-CI.
+Todos estamos preocupados com a questão da Qualidade (e.g., processos, produtos, artefatos) dos projetos que estamos envolvidos. Nesses dois tutorais ([tutorial 1](https://trajano.net/2016/11/integrating-travis-sonarqube/) e [tutorial 2](https://docs.travis-ci.com/user/sonarqube/)) são apresentados as etapas para automatizar o controle da qualidade de código com o SonarQube e o Travis-CI.
 
 Observer como o nosso travis foi configurado
 ```
@@ -133,6 +133,7 @@ script:
        
 ```
 Por se tratar de um projeto em Python, torna-se necessário adicionar algum comando a mais na configuração da máquina que será criada. Isso ocorre, pois o SonnaQube foi desenvolvido em Java e torna-se necessário configurar o ambiente java. Para isso foi adicionado as seguintes linhas no .travis.yml:
+
 ```
 jdk:
   - oraclejdk8
@@ -142,15 +143,19 @@ addons:
       - oracle-java8-installer 
 before_script:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle           
+
 ```
 
 ### Automatizando a Comunicação da equipe com o Travis e Slack
+Como pode ser percebido, são diversos detalhes para que devemos estar atentos para o desenvolvimento de uma aplicação. Além disso, torna-se dificil acompanhar todos os acontecimentos de um projeto se não tivermos um canal único que centraliza a comunicação. Imagine trabalhar em um projeto com 10 programadores e tendo que acompanhar as novas versões dos código, as quebras de build, o controle de qualidade e outros fatores de um projeto de forma não automatizada. Um verdadeiro caos. Certo? 
+
+Para resolver o problema acima, o travis permite enviar mensagens para os membros do projeto. Essa mensagens podem ser feitas por email ou por um aplicativo de comunicação com o Slack. Em nossa arquitetura utilizamos o slack e seguimos os seguintes tutoriais para a configuração do ambiente: [tutorial 1](https://docs.travis-ci.com/user/notifications/) e [tutorial 2](https://blog.travis-ci.com/2014-03-13-slack-notifications/).
 
 ## Terceira Etapa: Delivery Contínuo - Entregando toda hora um software novo
 
 ### Automatizando a entrega do produto com Travis e OpenShift
 
-##Referências:
+## Outras Referências:
 
 **[Tutorial de BDD com Python, Django e Behave](https://semaphoreci.com/community/tutorials/setting-up-a-bdd-stack-on-a-django-application)**
 
