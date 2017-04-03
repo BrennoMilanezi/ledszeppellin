@@ -156,10 +156,29 @@ Para resolver o problema acima, o travis permite enviar mensagens para os membro
 notifications:
     slack: xxxxx
 ```
-
-## Terceira Etapa: Delivery Contínuo - Entregando toda hora um software novo
+## Terceira Etapa: Delivery Contínuo - Entregando toda hora um software "novo"
 
 ### Automatizando a entrega do produto com Travis e OpenShift
+Agora que definimos todas as etapas de integração contínua e como vamos realizar os testes automaticamente, que tal pensarmos em como fazermos deploy automaticamente também? Em outras palavras, que tal apenas realizarmos o commit na master e o Travis ficar responsável por "instalar o software no servidor" ?
+
+No caso do Leds, utilizamos o OpenShift para ser o nosso servidor de deploy. Para saber como utilizá-lo integrado com o Travis leia esse [tutorial]((https://blog.openshift.com/how-to-build-and-deploy-openshift-java-projects-using-travis-ci/). Aqui está um exemplo da nossa integração:
+
+```
+deploy:
+  provider: openshift
+  user: paulossjunior@gmail.com
+  password:
+    secure: 1HM8jbE0223srglawzCMMJd2666ACV9nR5qOheRtmny8qQk1sw18Lh5Q6o+FHsGE1HcbP8FyJ4z+TXmQVRjU5vC9Jn2y3LcHQEIjvbuLxKobDPgokCXGNZiCBoCjBzZeXlLStIVLo4g4UvoIbLvVWpkyWImtdQaMtmg26povTLXSFS1v+IP/0Cvj+/wRz3he6Li4dd2d8OlKBgvt5UmNuo5loGtmkHqvqU+wdMJjCSXdzNkJFsLaBlra1iHgD2g/kIG4+pCWFA+WEgt8JLNuru6H5JEeoApA9HO8Oda332w5N55Yx1QSpM+EIzjnjooCfksiUgyrz90WttlF3i36fTwNt/P3SRVEXviFqui6/j7Sn8og1uMzHCpuN9jxl0MBeEi07rlukDqY5/AgXDrhoSaBRnZCWdgDyglS6B555CuUg4wlYyBIQgMAFrztWJ80+WE/6V48cgVmOE/99CUItnwkqYepwcyA+avadwz2QYcfOcevdWEuehQnqmWMQIamSfh47wlaip0WG6hrefKPNMT07z4j+xvBYdZaW4JHQmkblhS//QYmBzAd/wq9L+7eH50P4AE6wAa67aUXeakP+5CSFvb+STuFkqDqXJXu9nB6gJmQIgxIiM0Sa2wg4GoV77WKEbrn2vOqhfJCyFwcwP7ci0lJy/9W1GV0oQgtMnQ=
+  app: ledszeppellin
+  domain: paulossjunior
+  on:
+    repo: LEDS/ledszeppellin
+all_branches: true
+```
+
+Com a configuração acima, a aplicação é instalada no servidor do OpenShift toda vez que não houver problemas nos testes ou na qualidade do código. 
+
+That's all Folks.
 
 ## Outras Referências:
 
@@ -170,3 +189,7 @@ notifications:
 **[Integração Contínua e o processo Agile](http://blog.caelum.com.br/integracao-continua/)**
 
 **[Integrando Github com Travis](https://docs.travis-ci.com/user/getting-started/)**
+
+**[Integrando Travis e Heroku](http://gabrielfeitosa.com/integracao-continua-com-travis-e-heroku/)**
+
+**[Integrando Travis e Heroku 2](https://docs.travis-ci.com/user/deployment/heroku/)**
