@@ -118,9 +118,10 @@ Todos estamos preocupados com a questão da Qualidade (e.g., processos, produtos
 
 * Crie uma conta no [SonarQube](https://sonarqube.com/)
 * Crie uma chave privada no SonarQube com o seguintes passos: 
-  ** My Account
-  ** Security
-  ** crie o token e guarde em algum lugar.
+
+    * My Account
+    * Security
+    * crie o token e guarde em algum lugar.
   
 
 ### Automatizando a Comunicação da equipe com o Travis e Slack
