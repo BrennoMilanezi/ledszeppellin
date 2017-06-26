@@ -57,17 +57,27 @@ Ao realizar o **push** no
 
 ### Integrando o Travis e Github
 
-O Travis é um serviço de integração contínua que permite realizar diversos procedimentos toda vez que um determinado repositório, presente no Github, sofre alteração. Para realizar a integração entre o Github e o Travis basta seguir os passsos presentes nesse [link](https://docs.travis-ci.com/user/getting-started/). De forma sucinta, é necessário executar os seguintes passos:
-
+O Travis é um serviço de integração contínua que permite realizar diversos procedimentos, como testes automatizados, toda vez que um determinado repositório, presente no Github, sofre alteração. É um serviço totalmente customizável para se adequar a aplicação e sua linguagem usada. Para realizar a integração entre o Github e o Travis basta seguir os passos:
+ 
 * Crie uma conta no Travis e no Github
-* No Travis, solicite ao Github que o Travis tenha acesso aos repositórios do Github 
+* No Travis, solicite ao Github que o Travis tenha acesso aos repositórios do Github
 * No Travis, selecione o repositório do Github que seja ser "Vigiado" pelo Travis
 * No Git, crie um arquivo .travis.yml, como segue
 
+Algumas coisas que o travis.yml pode conter:
+ 
+* What programming language your project uses
+* What commands or scripts you want to be executed before each build (for example, to install or clone your project’s dependencies)
+* What command is used to run your test suite
+* Emails, Campfire and IRC rooms to notify about build failures
+ 
+Exemplo do arquivo travis.yml:
 ```
 language: python
 python:
   - '3.3'
+dist: trusty
+sudo: false
 
 branches:
   only:
@@ -79,38 +89,48 @@ install:
 
 script:
   - cd wsgi/myproject
-  - python manage.py behave  
+  - python manage.py behave 
 ```
-A tag **language** e **python** descrevem, respectivamente, qual é a linguagem que o projeto foi construido e qual versão do python foi utilizado. Essa informações são importantes, pois o Travis irá construir uma máquina virtual especifica para essa configuração. No caso do nosso projeto, será criada uma máquina linux com o python 3.3 instalada.
-```
-language: python
-python:
-  - '3.3'
-```
+Configuração do .travis.yml
+ 
+Tag **language:**
+A tag language e python descrevem, respectivamente, qual é a linguagem que o projeto foi construído e qual versão do python foi utilizado. Essa informações são importantes, pois o Travis irá construir uma máquina virtual específica para essa configuração.
+ 
+https://docs.travis-ci.com/user/languages/python/
+ 
+Tag **sudo:** e **dist:**
+Se adicionar **false** a tag **sudo:** (**sudo: false**) estará dizendo ao Travis para usar a infraestrutura padrão, que é o Ubuntu 12.04.
+    
+Se adicionarmos a tag **dist: ** com o valor **trusty** (**dist: trusty**) estaremos dizendo ao Travis para usar a infraestrutura baseada em Ubuntu Linux Trusty 14.04, ou seja, uma versão LTS mais recente do Linux.
+ 
+Se o valor de **sudo:** for **enable** (**sudo: enable**) estaremos dizendo ao Travis que iremos utilizar um ambiente mais customizável na máquina virtual. Por exemplo, podemos usar o **dist: trusty** junto ao **sudo: enable** para utilizar uma versão mais atualizada do Linux 14.04 na infraestrutura, ou utilizar a tag **os: osx** se precisar que a aplicação rode em um macOS.
+ 
+https://docs.travis-ci.com/user/ci-environment/
+ 
+Tag **branches:** e **only:**
+As tags branches e only definem quais branches do GitHub que o Travis deve "vigiar". Em outras palavras, o travis será ativado somente quando as branches desenvolvimento e master foram atualizadas.
+ 
+Tag **install:** e **script:**
+A tag install é utilizado para instalar dependências necessárias para a compilação e testes do software em desenvolvimento. No nosso caso, utilizamos essa tag para instalar o Django e outras biblioteca, podendo especificar passo a passo, ou fornecendo o script (.sh) com os comandos necessários. Por fim, a tag script é utilizada para executar comandos após a instalação das dependências. No nosso caso, usamos essa tag para definir a etapa de execução dos testes, ou seja, utilizamos a tag script para automatizar a execução dos nossos testes. Assim como no install, os comandos podem ser passo a passo ou em um arquivo de script.
 
-As tags **branches** e **only** definem quais braches do GitHub que o Travis deve "vigiar". Em outras palavras, o travis será ativiado somente quando as branches desenvolvimento e master foram atualizadas.
+**Ciclo de preparação do ambiente:**
+1- OPTIONAL Install apt addons
+2- OPTIONAL Install cache components
+3- before_install
+4- install
+5- before_script
+6- script
+7- OPTIONAL before_cache (for cleaning up cache)
+8- after_success or after_failure
+9- OPTIONAL before_deploy
+10- OPTIONAL deploy
+11- OPTIONAL after_deploy
+12- after_script
 
-```
-branches:
-  only:
-  - master
-  - desenvolvimento
-```
+Na pratica, nao existe diferenca caso escreva todos os passos de forma procedural em uma tag só, mas por motivos de organização e modularização de etapas, é preferível usar as várias tags que o Travis disponibiliza.
+ 
+https://docs.travis-ci.com/user/installing-dependencies/
 
-A tag **install** é utilizado para instalar dependências necessárias para a compilação e testes do software em desenvolvimento. No nosso caso, utilizamos essa tag para instalar o Django e outras biblioteca. 
-
-```
-install:
-  - pip install -r requirements.txt  
-```
-
-Por fim, a tag **script** é utilizada para executar comandos após a instalação das dependências. No nosso caso, usamos essa tag para definir a etapa de execução dos testes, ou seja, utiilzamos a tag script para automatizar a execução dos nossos testes.
-
-```
-script:
-  - cd wsgi/myproject
-  - python manage.py behave  
-```
 
 ### Automatizando o Teste de Qualidade com o Travis e SonarQube
 
